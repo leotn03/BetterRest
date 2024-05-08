@@ -16,6 +16,7 @@ struct ContentView: View {
     @State private var alertTitle = ""
     //@State private var alertMessage = ""
     
+    /** Autocalculate variable for bedtime */
     private var alertMessage: String {
         do{
             let config = MLModelConfiguration()
@@ -47,13 +48,14 @@ struct ContentView: View {
     var body: some View {
         NavigationStack{
             Form{
+                /** Using Sections instead of VStack */
                 //VStack (alignment: .leading, spacing: 0) {
                 Section{
                     DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
                         .labelsHidden()
                 } header: {
                     Text("When do you want to wake up?")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 
                 //VStack (alignment: .leading, spacing: 0) {
@@ -61,7 +63,7 @@ struct ContentView: View {
                     Stepper("\(sleepAmount.formatted()) hours", value: $sleepAmount, in: 4...12, step: 0.25)
                 } header: {
                     Text("Desired amount of sleep")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 
                 //VStack (alignment: .leading, spacing: 0) {
@@ -75,18 +77,19 @@ struct ContentView: View {
                     //Stepper("^[\(coffeAmount) cup](inflect: true)", value: $coffeAmount, in: 0...20)
                 } header: {
                     Text("Daily cofee intake")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 
                 Section{
                     Text(alertMessage)
                 }header: {
                     Text("Your ideal bedtime is...")
-                        .font(.headline)
+                        .font(.subheadline)
                 }
                 
             }
             .navigationTitle("Better Rest")
+            /** Using a button in a toolbar for calculate bedtime */
             /*.toolbar {
                 Button("Calculate", action: calculateBedTime)
             }
@@ -97,7 +100,7 @@ struct ContentView: View {
             }*/
         }
     }
-    
+    /** Function for the button "Calculate" in the toolbar */
     /*func calculateBedTime() {
         do{
             let config = MLModelConfiguration()
